@@ -8,7 +8,7 @@ class EvalConfig:
         ("baseline_1", ModelBaseline1, {}),  # model_name, model class, model parameters (dict)
     ]
     split_metrics = ["mae"]
-    loo_metrics = []
+    loo_metrics = ["hit_rate"]
     full_metrics = []
 
     # Split parameters
