@@ -8,6 +8,7 @@ class Constant:
 
     # Content
     CONTENT_PATH = DATA_PATH / 'content'
+    EVALUATION_PATH = DATA_PATH / 'evaluations'
     # - item
     ITEMS_FILENAME = 'movies.csv'
     ITEM_ID_COL = 'movieId'
@@ -23,7 +24,8 @@ class Constant:
     TIMESTAMP_COL = 'timestamp'
     USER_ITEM_RATINGS = [USER_ID_COL, ITEM_ID_COL, RATING_COL]
     RATINGS_SCALE = (0.5, 5)  
-    
+
+    # - item
 
     # Rating scale
     RATINGS_SCALE = (0.5, 5)    # -- fill in here the ratings scale as a tuple (min_value, max_value)

@@ -29,4 +29,5 @@ def export_evaluation_report(df):
 
     The name of the report is versioned using today's date
     """
+    df.to_csv(C.EVALUATION_PATH / f"evaluation_report_{pd.Timestamp.now().strftime('%Y-%m-%d')}.csv", index=False)
     pass
