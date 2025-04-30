@@ -1,10 +1,10 @@
 # 🎬 Recommender System – The Evaluator Block
 
-Welcome to our **Evaluator Block** — a project developed as part of the course *MLSMM2156 – Recommender Systems* (UCLouvain, 2021–2022). This module is designed to **evaluate collaborative filtering models** using multiple validation strategies and performance metrics, all built around the [Surprise](https://surprise.readthedocs.io/en/stable/) library.
+This project was developed for the course *MLSMM2156 – Recommender Systems* (UCLouvain, 2021–2022). It implements an **Evaluator Block** to assess collaborative filtering models using the [Surprise](https://surprise.readthedocs.io/en/stable/) library. The system supports multiple evaluation strategies and key performance metrics to compare model quality.
 
 ---
 
-## 👨‍👩‍👧‍👦 Team — Group 5
+## 👥 Team — Group 5
 
 - **Cyril D.**
 - **Hamza E.**
@@ -13,29 +13,44 @@ Welcome to our **Evaluator Block** — a project developed as part of the course
 
 ---
 
-## 🧠 What Is This Project About?
+## 🧠 Project Goals
 
-In a recommender system, evaluation is key. This project helps you:
-- Run and compare several **baseline models** (e.g., KNN, SVD).
-- Use multiple **validation strategies** (random split, leave-one-out, full dataset).
-- Compute relevant **recommendation metrics** (MAE, RMSE, Hit Rate, Novelty).
-- **Generate and export** daily evaluation reports for tracking progress and experiments.
+The Evaluator Block allows us to:
+- Compare baseline recommender models (e.g. KNN, SVD)
+- Use different evaluation strategies: random split, leave-one-out (LOO), and full-dataset
+- Calculate performance metrics: MAE, RMSE, Hit Rate, and Novelty
+- Export evaluation results in structured, dated reports
 
-Everything is modular, reproducible, and designed for extension.
+The system is modular and easily extendable.
 
 ---
 
-## 🗂️ Folder & File Overview
+## 📓 Main Notebook: `evaluator.ipynb`
 
-| File / Folder        | Description |
-|----------------------|-------------|
-| `evaluator.ipynb`    | The main notebook to run evaluations and generate the report. |
-| `loaders.py`         | Loads data and exports evaluation results. Contains the `load_ratings()` and `export_evaluation_report()` functions. |
-| `models.py`          | Utility functions, including `get_top_n()` to extract Top-N recommendations from predictions. |
-| `metrics.py`         | Custom metric implementations: RMSE, Hit Rate, and Novelty. |
-| `configs.py`         | Central configuration file for model selection, evaluation strategies, and metric inclusion. |
-| `constants.py`       | Global constants such as `RATINGS_SCALE` and `EVALUATION_PATH`. |
-| `evaluation/`        | Folder where daily evaluation reports (CSV files) are saved. Example: `evaluation/2025_04_30.csv` |
+All evaluation logic is implemented and executed in the Jupyter notebook `evaluator.ipynb`.
+
+This notebook:
+- Loads and processes the ratings data
+- Triggers the evaluation for all three validation strategies
+- Computes the required metrics
+- Generates the final evaluation report
+- Calls helper functions defined in other Python modules (see below)
+
+> 📌 Make sure to run all cells in `evaluator.ipynb` in sequence to ensure full pipeline execution and report generation.
+
+---
+
+## 🗂️ Supporting Files
+
+To support the evaluation process, the following files were updated or added:
+
+| File            | Status       | Changes Made |
+|-----------------|--------------|--------------|
+| `loaders.py`    | ✅ Modified  | - Added `surprise_format` parameter to `load_ratings()` using `Reader` and `.load_from_df()`<br>- Implemented `export_evaluation_report(df)` to save `.csv` files in `/evaluation/` |
+| `constants.py`  | ✅ Modified  | - Defined:<br>```python<br>RATINGS_SCALE = (1, 5)<br>EVALUATION_PATH = "evaluation/"<br>``` |
+| `configs.py`    | ✅ Modified  | - Defined baseline models and parameters<br>- Set `top_n_value`<br>- Registered metrics in `available_metrics` dictionary |
+| `models.py`     | ✅ Modified  | - Added:<br>```python<br>def get_top_n(predictions, n=10):<br>    # Extracts top-N recommendations per user<br>``` |
+| `evaluation/`   | ✅ Created   | - Folder for exported reports named by date (e.g. `2025_04_30.csv`) |
 
 ---
 
@@ -73,15 +88,3 @@ Once evaluation is done:
 The export path is defined in `constants.py`:
 ```python
 EVALUATION_PATH = "evaluation/"
-
-## 🔍 Files Modified - Make sure you updated those files
-
-To make the evaluator functional and modular, the following **supporting files** were updated or added. These contain helper functions, constants, configurations, and export logic used by the main notebook.
-
-| File / Folder        | Status       | Purpose and Modifications |
-|----------------------|--------------|-----------------------------|
-| `loaders.py`         | ✅ Modified  | - Added `surprise_format` parameter to `load_ratings()` to return a Surprise `Dataset` using `Reader` and `.load_from_df()`.<br>- Added `export_evaluation_report(df)` to export reports as `.csv` to `/evaluation/` folder with today's date. |
-| `constants.py`       | ✅ Modified  | - Added global constants:<br>```python<br>RATINGS_SCALE = (1, 5)<br>EVALUATION_PATH = "evaluation/"<br>```<br>- These are used in both `loaders.py` and model evaluation logic. |
-| `configs.py`         | ✅ Modified  | - Defined baseline models (e.g. KNNBasic, SVD) and their parameters.<br>- Added metric configuration per evaluation type in the `available_metrics` dictionary (e.g., RMSE for split, Hit Rate for LOO, Novelty for full).<br>- Added `top_n_value` setting for top-N recommendations. |
-| `models.py`          | ✅ Modified  | - Added utility function:<br>```python<br>def get_top_n(predictions, n=10):<br>    # Extract top-n predictions per user<br>```<br>- Used for generating top-N results in both LOO and full-dataset evaluations. |
-| `evaluation/`        | ✅ Created   | - Output directory used to store evaluation reports exported via `export_evaluation_report()`.<br>- Files are automatically named with the current date: `YYYY_MM_DD.csv`. |
