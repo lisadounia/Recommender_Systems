@@ -7,7 +7,8 @@ The project compares different algorithms and evaluates their performance using 
 
 ## Demo
 
-https://youtu.be/qFKSxxUZ-hM
+
+[![Watch the demo](https://img.youtube.com/vi/qFKSxxUZ-hM/0.jpg)](https://youtu.be/qFKSxxUZ-hM)
 
 ---
 
