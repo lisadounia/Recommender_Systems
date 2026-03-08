@@ -69,7 +69,7 @@ app.py          # Streamlit interface
 models.py       # Model training
 recs.py         # Recommendation generation
 evaluator.py    # Model evaluation
-metrics.py      # Diversity metrics
+metrics.py      # Metrics
 loaders.py      # Data loading
 configs.py      # Model configuration
 constants.py    # Global constants
