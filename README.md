@@ -8,7 +8,7 @@ The project compares different algorithms and evaluates their performance using 
 ## Demo
 
 
-[![Watch the demo](https://img.youtube.com/vi/qFKSxxUZ-hM/0.jpg)](https://youtu.be/qFKSxxUZ-hM)
+[![Movie Recommender System Demo](https://img.youtube.com/vi/qFKSxxUZ-hM/0.jpg)](https://youtu.be/qFKSxxUZ-hM)
 
 ---
 
